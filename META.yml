@@ -1,0 +1,28 @@
+--- #YAML:1.0
+name:               Zabbix-Sender
+version:            0.01
+abstract:           A pure-perl implementation of zabbix-sender.
+author:
+    - "Dominik Schulz" <"lkml@ds.gauner.org">
+license:            perl
+distribution_type:  module
+configure_requires:
+    ExtUtils::MakeMaker:  0
+build_requires:
+    ExtUtils::MakeMaker:  0
+requires:
+    IO::Select:           0
+    IO::Socket:           0
+    JSON:                 2.21
+    Moose:                1.09
+    namespace::autoclean:  0.09
+    Net::Domain:          0
+    Test::More:           0
+no_index:
+    directory:
+        - t
+        - inc
+generated_by:       ExtUtils::MakeMaker version 6.55_02
+meta-spec:
+    url:      http://module-build.sourceforge.net/META-spec-v1.4.html
+    version:  1.4
