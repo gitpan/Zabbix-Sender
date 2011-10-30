@@ -1,9 +1,9 @@
 --- #YAML:1.0
 name:               Zabbix-Sender
-version:            0.01
+version:            0.02
 abstract:           A pure-perl implementation of zabbix-sender.
 author:
-    - "Dominik Schulz" <"lkml@ds.gauner.org">
+    - Dominik Schulz <lkml@ds.gauner.org>
 license:            perl
 distribution_type:  module
 configure_requires:
