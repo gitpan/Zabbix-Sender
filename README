@@ -1,43 +1,113 @@
-Zabbix-Sender
+NAME
+    Zabbix::Sender - A pure-perl implementation of zabbix-sender.
 
-INSTALLATION
+VERSION
+    version 0.03
 
-To install this module, run the following commands:
+SYNOPSIS
+    This code snippet shows how to send the value "OK" for the item
+    "my.zabbix.item" to the zabbix server/proxy at
+    "my.zabbix.server.example" on port "10055".
 
-	perl Makefile.PL
-	make
-	make test
-	make install
+        use Zabbix::Sender;
 
-SUPPORT AND DOCUMENTATION
+        my $Sender = Zabbix::Sender->new({
+            'server' => 'my.zabbix.server.example',
+            'port' => 10055,
+        });
+        $Sender->send('my.zabbix.item','OK');
 
-After installing, you can find documentation for this module with the
-perldoc command.
+NAME
+    Zabbix::Sender - A pure-perl implementation of zabbix-sender.
 
-    perldoc Zabbix::Sender
+SUBROUTINES/METHODS
+  _init_json
+    Zabbix 1.8 uses a JSON encoded payload after a custom Zabbix header. So
+    this initializes the JSON object.
 
-You can also look for information at:
+  _init_hostname
+    The hostname of the sending instance may be given in the constructor.
 
-    RT, CPAN's request tracker
-        http://rt.cpan.org/NoAuth/Bugs.html?Dist=Zabbix-Sender
+    If not it is detected here.
 
-    AnnoCPAN, Annotated CPAN documentation
-        http://annocpan.org/dist/Zabbix-Sender
+  zabbix_template_1_8
+    ZABBIX 1.8 TEMPLATE
 
-    CPAN Ratings
-        http://cpanratings.perl.org/d/Zabbix-Sender
+    a4 - ZBXD b - 0x01 c4 - Length of Request in Bytes (64-bit integer),
+    aligned left, padded with 0x00 c4 - dito a* - JSON encoded request
 
-    Search CPAN
-        http://search.cpan.org/dist/Zabbix-Sender/
+    This may be changed to a HashRef if future version of zabbix change the
+    header template.
 
+  _encode_request
+    This method encodes the item and value as a json string and creates the
+    required header acording to the template defined above.
+
+  _decode_answer
+    This method tries to decode the answer received from the server.
+
+  send
+    Send the given item with the given value to the server.
+
+    Takes two arguments: item and value. Both should be scalars.
+
+  DEMOLISH
+    Disconnects any open sockets on destruction.
+
+AUTHOR
+    "Dominik Schulz", "<"lkml at ds.gauner.org">"
+
+BUGS
+    Please report any bugs or feature requests to "bug-zabbix-sender at
+    rt.cpan.org", or through the web interface at
+    <http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Zabbix-Sender>. I will
+    be notified, and then you'll automatically be notified of progress on
+    your bug as I make changes.
+
+SUPPORT
+    You can find documentation for this module with the perldoc command.
+
+        perldoc Zabbix::Sender
+
+    You can also look for information at:
+
+    *   RT: CPAN's request tracker
+
+        <http://rt.cpan.org/NoAuth/Bugs.html?Dist=Zabbix-Sender>
+
+    *   AnnoCPAN: Annotated CPAN documentation
+
+        <http://annocpan.org/dist/Zabbix-Sender>
+
+    *   CPAN Ratings
+
+        <http://cpanratings.perl.org/d/Zabbix-Sender>
+
+    *   Search CPAN
+
+        <http://search.cpan.org/dist/Zabbix-Sender/>
+
+ACKNOWLEDGEMENTS
+    This code is based on the documentation and sample code found at:
+
+    http://www.zabbix.com/wiki/doc/tech/proto/zabbixsenderprotocol
+    http://www.zabbix.com/documentation/1.8/protocols
 
 LICENSE AND COPYRIGHT
+    Copyright 2011 Dominik Schulz.
 
-Copyright (C) 2011 "Dominik Schulz"
+    This program is free software; you can redistribute it and/or modify it
+    under the terms of either: the GNU General Public License as published
+    by the Free Software Foundation; or the Artistic License.
 
-This program is free software; you can redistribute it and/or modify it
-under the terms of either: the GNU General Public License as published
-by the Free Software Foundation; or the Artistic License.
+    See http://dev.perl.org/licenses/ for more information.
 
-See http://dev.perl.org/licenses/ for more information.
+AUTHOR
+    Dominik Schulz <dominik.schulz@gauner.org>
+
+COPYRIGHT AND LICENSE
+    This software is copyright (c) 2012 by Dominik Schulz.
+
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
 

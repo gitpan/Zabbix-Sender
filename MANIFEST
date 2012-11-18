@@ -1,9 +1,13 @@
 Changes
+LICENSE
 MANIFEST
-MANIFEST.SKIP
+META.json
+META.yml
 Makefile.PL
 README
+README.md
 bin/zabbix-sender
+dist.ini
 lib/Zabbix/Sender.pm
 t/00-load.t
 t/boilerplate.t
@@ -13,4 +17,6 @@ t/manifest.t
 t/perlcriticrc
 t/pod-coverage.t
 t/pod.t
-META.yml                                 Module meta-data (added by MakeMaker)
+t/release-eol.t
+t/release-no-tabs.t
+t/release-pod-syntax.t
